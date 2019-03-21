@@ -70,7 +70,7 @@ If (Test-Path $outfilename){
 $software = Get-ItemProperty HKLM:\Software\Microsoft\Windows\CurrentVersion\Uninstall\* | Sort-Object DisplayName | Where-Object {$_.Publisher -like $vendor} `
 	|Select-Object @{Name='Scan Time';Expression={$now}}, @{Name='Operating System';Expression={$osname.Caption}}, @{Name='User Name';Expression={$name}}, @{Name='Machine Name';Expression={$machine}},`
 		DisplayName, DisplayVersion, Publisher, InstallDate, InstallLocation  `
-	| Export-Csv C:\Users\Public\Documents\$outfilename -NoTypeInformation
+	| Export-Csv C:\$outfilename -NoTypeInformation
 
 $outfilename64 = $now + "-" + $machine + "-" + $name + "-64.csv"
 
@@ -81,7 +81,7 @@ If (Test-Path $outfilename64){
 $64software = Get-ItemProperty HKLM:\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall\* | Sort-Object DisplayName | Where-Object {$_.Publisher -like $vendor} `
 	|Select-Object @{Name='Scan Time';Expression={$now}}, @{Name='Operating System';Expression={$osname.Caption}}, @{Name='User Name';Expression={$name}}, @{Name='Machine Name';Expression={$machine}},`
 		DisplayName, DisplayVersion, Publisher, InstallDate, InstallLocation `
-	| Export-Csv C:\Users\Public\Documents\$outfilename64 -NoTypeInformation
+	| Export-Csv C:\$outfilename64 -NoTypeInformation
 
 uploadFile($outfilename)
 uploadFile($outfilename64)
