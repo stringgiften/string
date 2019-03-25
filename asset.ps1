@@ -23,7 +23,7 @@ function uploadFile($_outfilename){
     $ftprequest.UsePassive = $True
 
     # Read the File for Upload
-    $content = gc -en byte $_outfilename
+    $content = gc -en byte C:\Scripts\$_outfilename
 
     if($content.Length -eq 0) {
         Write-Host "File appears to be empty"
